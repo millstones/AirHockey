@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using AirHockey.ECS.Components;
 using AirHockey.ECS.UnityComponents;
-using AirHockey.Unity;
 using Leopotam.Ecs;
 using Millstones.Common;
 using Millstones.LeoECSExtension;
@@ -12,7 +11,7 @@ using UnityEngine;
 
 namespace AirHockey.ECS.Systems 
 {
-    sealed class PutterSpawnSystem :IEcsInitSystem,  IEcsRunSystem 
+    sealed class PutterSpawnSystem : IEcsRunSystem 
     {
         private readonly GameObjectFactory _gameObjectFactory;
         readonly EcsWorld _world = null;
@@ -24,10 +23,13 @@ namespace AirHockey.ECS.Systems
         private EcsEntity _downPutter;
         private Vector3 _upPutterStartPosition;
         private Vector3 _downPutterStartPosition;
-        
-        public void Init()
+
+        public PutterSpawnSystem(Vector3 upPutterStartPosition, Vector3 downPutterStartPosition)
         {
+            _upPutterStartPosition = upPutterStartPosition;
+            _downPutterStartPosition = downPutterStartPosition;
             _loader = Loader();
+
         }
         
         public void Run()
@@ -50,10 +52,6 @@ namespace AirHockey.ECS.Systems
         
         IEnumerator Loader()
         {
-            var table = Service<ITableService>.Get();
-            _upPutterStartPosition = table.TablePositions.UpSpawnPoint.position;
-            _downPutterStartPosition = table.TablePositions.DownSpawnPoint.position;
-            
             var loader = CreteEntity<EnemyTag>(_upPutterStartPosition);
             while (loader.MoveNext()) yield return null;
             _upPutter = loader.Current;
@@ -82,11 +80,4 @@ namespace AirHockey.ECS.Systems
             yield return entity;
         }
     }
-    
-    public struct TestStr
-    {
-        public Vector3 Implementor;
-        public IPositionComponentImplementor Implementor2;
-    }
-    public class TestDesc : EntityDescriptor<TestStr> { }
 }

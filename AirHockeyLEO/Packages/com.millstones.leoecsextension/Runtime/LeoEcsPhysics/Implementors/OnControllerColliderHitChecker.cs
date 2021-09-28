@@ -1,4 +1,3 @@
-using Millstones.LeoECSExtension.LeoEcsPhysics.Emitter;
 using UnityEngine;
 
 namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
@@ -7,7 +6,7 @@ namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
     {
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            EcsPhysicsEvents.RegisterControllerColliderHitEvent(gameObject, hit.collider, hit.normal, hit.moveDirection);
+            EcsPhysicsEventsSystem.RegisterControllerColliderHitEvent(gameObject, hit.collider, hit.normal, hit.moveDirection);
         }
     }
 }

@@ -6,18 +6,18 @@ using UnityEngine;
 
 namespace AirHockey.ECS.Systems
 {
-    public class MoveLimitationSystem : IEcsInitSystem, IEcsRunSystem
+    public class MoveLimitationSystem : IEcsRunSystem
     {
         private EcsFilter<PutterTag, EnemyTag, MoveViewComponent> _filterEnemy;
         private EcsFilter<PutterTag, PlayerTag, MoveViewComponent> _filterPlayer;
 
         private Vector3 _center;
-        
-        public void Init()
+
+        public MoveLimitationSystem(ITableService tableService)
         {
-            _center = Service<ITableService>.Get().TablePositions.CenterPoint.position;
+            _center = tableService.TablePositions.CenterPoint.position;
         }
-        
+
         public void Run()
         {
             Debug.DrawLine(_center - Vector3.left, _center + Vector3.right);

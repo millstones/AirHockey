@@ -7,22 +7,27 @@ namespace AirHockey.ECS.Systems
 {
     public class PutterPlayerOnTableMoveSystem : IEcsRunSystem
     {
+        private readonly IInputService _inputService;
         private const int SPEED_MULTIPLIER = 10; // TODO:
         
         private EcsFilter<PlayerTag, OnTableTag, MoveViewComponent> _filter;
 
         private EcsWorld _ecsWorld;
+
+        public PutterPlayerOnTableMoveSystem(IInputService inputService)
+        {
+            _inputService = inputService;
+        }
         
         public void Run()
         {
-            var inputService = Service<InputService>.Get();
-            
-            if (!inputService.IsLeftMouseButtonDown) return;
+           
+            if (!_inputService.IsLeftMouseButtonDown) return;
             
             foreach (var i in _filter)
             {
                 //var filterEntity = _filter.GetEntity(i);
-                var hitInfo = inputService.GetMouseHitInfo(_ecsWorld);
+                var hitInfo = _inputService.GetMouseHitInfo(_ecsWorld);
 
                 //if (filterEntity.Equals(hitInfo.EntityIdMouseHit))
                 {

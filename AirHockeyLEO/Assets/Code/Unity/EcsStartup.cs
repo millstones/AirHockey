@@ -1,7 +1,6 @@
 ﻿using AirHockey.ECS.Components;
 using AirHockey.ECS.Services;
 using AirHockey.ECS.Systems;
-using LeoEcsPhysics;
 using Leopotam.Ecs;
 using Millstones.Common;
 using Millstones.LeoECSExtension.LeoEcsPhysics;
@@ -17,32 +16,32 @@ namespace AirHockey.Unity {
         EcsWorld _world;
         EcsSystems _updateSystems;
         EcsSystems _fixedUpdateSystems;
+        EcsPhysicsEventsSystem _physicsEventsSystem;
 
         void Start () {
             // void can be switched to IEnumerator for support coroutines.
-            Service<ITableService>.Set(table.GetComponent<ITableService>());
-            Service<GameSettings>.Set(gameSettings);
-            Service<InputService>.Set(new InputService(Camera.main));
-            
+
+            var tableSets = table.GetComponent<TableMonoScript>();
+            var inputService = new InputService(Camera.main);
             _world = new EcsWorld ();
             _updateSystems = new EcsSystems (_world);
             _fixedUpdateSystems = new EcsSystems (_world);
-            EcsPhysicsEvents.ecsWorld = _world;
+            _physicsEventsSystem = new EcsPhysicsEventsSystem(_world);
+
 #if UNITY_EDITOR
             Leopotam.Ecs.UnityIntegration.EcsWorldObserver.Create (_world);
             Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create (_updateSystems);
 #endif
             
             var gameObjectFactory = new GameObjectFactory();
-            
-            
+
+
             _updateSystems
-                .Add(new PhysicsEventsService())
                 .Add(new OnStartNewTimeSystem())
                 .Add(new OnTableDetectorSystem())
-                .Add(new TableSpawnSystem())
-                .Add(new PutterSpawnSystem())
-                .Add(new PuckSpawnSystem())
+                .Add(new TableSpawnSystem(tableSets))
+                .Add(new PutterSpawnSystem(tableSets.TablePositions.UpSpawnPoint.position, tableSets.TablePositions.DownSpawnPoint.position))
+                .Add(new PuckSpawnSystem(tableSets.TablePositions.CenterPoint.position))
                 .Add(new FreezeAxisSystem())
                 .Add(new GoalDetectorSystem())
                 
@@ -51,17 +50,14 @@ namespace AirHockey.Unity {
                 .Inject(gameObjectFactory)
                 
                 .OneFrame<OnStartNewTimeEvent>()
-                .OneFrame<PhysicsEventsService.PhysicsEventsData>()
-                .OneFrame<OnCollisionEnterEvent>()
-                .OneFrame<OnTriggerEnterEvent>()
-                
+
                 .Init();
             
             
             _fixedUpdateSystems
-                .Add(new PutterPlayerOnTableMoveSystem())
-                .Add(new PutterEnemyOnTableMoveSystem())
-                .Add(new MoveLimitationSystem())
+                .Add(new PutterPlayerOnTableMoveSystem(inputService))
+                .Add(new PutterEnemyOnTableMoveSystem(tableSets.TablePositions.DownGate.gameObject.transform.position, gameSettings.putterSetting.Speed))
+                .Add(new MoveLimitationSystem(tableSets))
 
                 .Init();
         }
@@ -73,7 +69,8 @@ namespace AirHockey.Unity {
 
         private void FixedUpdate()
         {
-            _fixedUpdateSystems?.Run ();
+            _fixedUpdateSystems?.Run();
+            _physicsEventsSystem.FixedUpdate();
         }
 
         void OnDestroy () {

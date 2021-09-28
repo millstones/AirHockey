@@ -1,5 +1,4 @@
-﻿using Millstones.LeoECSExtension.LeoEcsPhysics.Emitter;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
 {
@@ -7,7 +6,7 @@ namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
     {
         private void OnCollisionStay(Collision other)
         {
-            EcsPhysicsEvents.RegisterCollisionStayEvent(gameObject, other.collider, other.GetContact(0), other.relativeVelocity);
+            EcsPhysicsEventsSystem.RegisterCollisionStayEvent(gameObject, other.collider, other.GetContact(0), other.relativeVelocity);
         }
     }
 }

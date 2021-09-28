@@ -1,12 +1,13 @@
 ﻿using AirHockey.ECS.Services;
 using Leopotam.Ecs;
 using Millstones.LeoECSExtension.LeoEcsPhysics;
+using Millstones.LeoECSExtension.LeoEcsPhysics.Events;
 
 namespace AirHockey.ECS.Systems
 {
     public class OnTableDetectorSystem : IEcsRunSystem
     {
-        private EcsFilter<PhysicsEventsService.PhysicsEventsData>.Exclude<OnTableTag, TableTag>.Exclude<GateTag> _filter;
+        private EcsFilter<OnEntityCollisionEvent>.Exclude<OnTableTag, TableTag>.Exclude<GateTag> _filter;
 
         private EcsWorld _ecsWorld;
         

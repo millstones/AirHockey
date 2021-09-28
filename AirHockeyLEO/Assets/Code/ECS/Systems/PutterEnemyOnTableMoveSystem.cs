@@ -6,23 +6,25 @@ using UnityEngine;
 
 namespace AirHockey.ECS.Systems
 {
-    public class PutterEnemyOnTableMoveSystem : IEcsInitSystem, IEcsRunSystem
+    public class PutterEnemyOnTableMoveSystem : IEcsRunSystem
     {
-        private int _speedMultiplier;
-        
+        private readonly int _speedMultiplier;
+        private readonly Vector3 _targetGate;
+
         private EcsFilter<EnemyTag, OnTableTag, MoveViewComponent> _enemyFilter;
         private EcsFilter<PuckTag, OnTableTag, MoveViewComponent> _puckFilter;
 
-        private Vector3 _targetGate;
 
         private EcsWorld _ecsWorld;
-        
-        public void Init()
+
+        private ITableService _tableService;
+
+        public PutterEnemyOnTableMoveSystem(Vector3 targetGate, int putterMaxSpeed)
         {
-            _speedMultiplier = Service<GameSettings>.Get().putterSetting.Speed;
-            _targetGate = Service<ITableService>.Get().TablePositions.DownGate.transform.position;
+            _targetGate = targetGate;
+            _speedMultiplier = putterMaxSpeed;
         }
-        
+
         public void Run()
         {
             foreach (var i in _enemyFilter)

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace AirHockey.ECS.Systems
 {
-    public class PuckSpawnSystem : IEcsInitSystem, IEcsRunSystem
+    public class PuckSpawnSystem : IEcsRunSystem
     {
         private readonly GameObjectFactory _gameObjectFactory;
         readonly EcsWorld _world = null;
@@ -19,11 +19,13 @@ namespace AirHockey.ECS.Systems
 
         private EcsFilter<OnStartNewTimeEvent, PuckTag> _onStartNewTimeFilter;
 
+  
         private Vector3 _startPosition;
         private EcsEntity _puckEntity;
-        
-        public void Init()
+
+        public PuckSpawnSystem(Vector3 tableService)
         {
+            _startPosition = tableService;
             _loader = Loader();
         }
         
@@ -42,8 +44,6 @@ namespace AirHockey.ECS.Systems
         
         IEnumerator Loader()
         {
-            var table =Service<ITableService>.Get();
-            _startPosition = table.TablePositions.CenterPoint.position;
             var loader = _gameObjectFactory.Build("Puck");
             while (loader.MoveNext()) yield return null;
             var gameObject = loader.Current;

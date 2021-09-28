@@ -1,5 +1,4 @@
-﻿using Millstones.LeoECSExtension.LeoEcsPhysics.Emitter;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
 {
@@ -7,7 +6,7 @@ namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
     {
         private void OnCollisionExit2D(Collision2D other)
         {
-            EcsPhysicsEvents.RegisterCollisionExit2DEvent(gameObject, other.collider, other.relativeVelocity);
+            EcsPhysicsEventsSystem.RegisterCollisionExit2DEvent(gameObject, other.collider, other.relativeVelocity);
         }
     }
 }

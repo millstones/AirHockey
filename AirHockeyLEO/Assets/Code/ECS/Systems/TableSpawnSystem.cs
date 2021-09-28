@@ -1,23 +1,28 @@
 ﻿using AirHockey.Unity;
-using LeoEcsPhysics;
 using Leopotam.Ecs;
-using Millstones.Common;
 using Millstones.LeoECSExtension;
+using Millstones.LeoECSExtension.LeoEcsPhysics.Implementors;
 using Millstones.LeoECSExtension.UnityComponents;
 
 namespace AirHockey.ECS.Systems
 {
     public class TableSpawnSystem : IEcsInitSystem
     {
+        private readonly ITableService _tableService;
         readonly EcsWorld _world = null;
-
+        
+        
+        
+        public TableSpawnSystem(ITableService tableService)
+        {
+            _tableService = tableService;
+        }
+        
         public void Init()
         {
-            var table = Service<ITableService>.Get();
-            
-            var plane = table.TablePositions.Plane;
-            var gateUp = table.TablePositions.UpGate;
-            var gateDown = table.TablePositions.DownGate;
+            var plane = _tableService.TablePositions.Plane;
+            var gateUp = _tableService.TablePositions.UpGate;
+            var gateDown = _tableService.TablePositions.DownGate;
 
             plane.AddComponent<OnCollisionEnterChecker>();
             plane.AddComponent<EntityReferenceImplementor>();

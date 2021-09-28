@@ -1,5 +1,4 @@
-﻿using Millstones.LeoECSExtension.LeoEcsPhysics.Emitter;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
 {
@@ -7,7 +6,7 @@ namespace Millstones.LeoECSExtension.LeoEcsPhysics.Implementors
     {
         private void OnTriggerEnter2D(Collider2D other)
         { 
-            EcsPhysicsEvents.RegisterTriggerEnter2DEvent(gameObject, other);
+            EcsPhysicsEventsSystem.RegisterTriggerEnter2DEvent(gameObject, other);
         }
     }
 }

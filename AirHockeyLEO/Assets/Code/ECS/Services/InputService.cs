@@ -4,7 +4,13 @@ using UnityEngine;
 
 namespace AirHockey.ECS.Services
 {
-    public class InputService
+    public interface IInputService
+    {
+        InputService.HitInfo GetMouseHitInfo(EcsWorld ecsWorld);
+        bool IsLeftMouseButtonDown { get; }
+    }
+    
+    public class InputService : IInputService
     {
         public float Horizontal => Input.GetAxis("Horizontal");
         public float Vertical => Input.GetAxis("Vertical");
