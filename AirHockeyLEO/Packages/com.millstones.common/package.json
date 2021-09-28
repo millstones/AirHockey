@@ -1,0 +1,15 @@
+{
+  "name": "com.millstones.common",
+  "version": "0.0.1",
+  "displayName": "Millstones.Common",
+  "unity": "2019.1",
+  "dependencies": {
+    "com.unity.addressables": "1.18.15"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Millstones",
+    "email": "",
+    "url": ""
+  }
+}

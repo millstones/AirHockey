@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: dbbf288d442c4d84da74ca01327d951d
+  m_SerializeEntries:
+  - m_GUID: 151e4de1aabf4c240877740377e0ceaf
+    m_Address: Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: b1bc66f34f11a5540b2119a6fa7b3ff5
+    m_Address: Table
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 3334921486731148950, guid: b1bc66f34f11a5540b2119a6fa7b3ff5, type: 3}
+    m_TargetAsset: {fileID: 3334921486731148950, guid: b1bc66f34f11a5540b2119a6fa7b3ff5, type: 3}
+  - m_GUID: 6ffbc9288039052419a06f77ddc5e6e3
+    m_Address: Putter
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 1507670411730702299, guid: 6ffbc9288039052419a06f77ddc5e6e3, type: 3}
+    m_TargetAsset: {fileID: 1507670411730702299, guid: 6ffbc9288039052419a06f77ddc5e6e3, type: 3}
+  - m_GUID: ba1b192669f089941a0fcf569c435b6d
+    m_Address: Puck
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2744761433997950914, guid: ba1b192669f089941a0fcf569c435b6d, type: 3}
+    m_TargetAsset: {fileID: 2744761433997950914, guid: ba1b192669f089941a0fcf569c435b6d, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 1a814099ead293c4db74b41b1304577e, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 73e21cdda6a7a0549a8619fc5d9ac0f1, type: 2}
+    - {fileID: 11400000, guid: b49b595ece08034449d0386291cf50a3, type: 2}

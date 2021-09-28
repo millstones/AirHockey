@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="up-panel">
+        <ui:VisualElement name="score-view" style="align-items: center; justify-content: center; flex-direction: row;">
+            <ui:Label text="Label" display-tooltip-when-elided="true" name="down-player-score" style="align-items: center; font-size: 96px; color: rgb(0, 21, 178); -unity-text-align: upper-right; -unity-font: none; -unity-font-style: bold;" />
+            <ui:Label text=" : &#x9; " display-tooltip-when-elided="true" style="align-items: center; font-size: 96px; color: rgb(0, 21, 178);" />
+            <ui:Label text="Label" display-tooltip-when-elided="true" name="up-player-score" style="align-items: center; font-size: 96px; color: rgb(0, 21, 178); -unity-font-style: bold;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,17 @@
+{
+    "name": "Millstones.LeoECSExtension",
+    "rootNamespace": "Millstones.LeoECSExtension",
+    "references": [
+        "Leopotam.Ecs",
+        "Millstones.Common"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
